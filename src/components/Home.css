@@ -19,17 +19,17 @@
   justify-content: flex-start;
   gap: 20px;
 }
-.btns button {
+.btns .btn__primary {
   padding: 10px 20px;
   font-size: 14px;
   text-transform: uppercase;
 }
-.btns button:last-child {
+.btns .btn__primary:last-child {
   background-color: white;
   color: var(--primary);
   border: 1px solid var(--primary);
 }
-.btns button:last-child:hover {
+.btns .btn__primary:last-child:hover {
   background-color: var(--primary);
   color: white;
 }

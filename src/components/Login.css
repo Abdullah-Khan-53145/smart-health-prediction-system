@@ -1,0 +1,126 @@
+.back_to_home {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+}
+
+.back_to_home svg {
+  height: 40px;
+  width: 40px;
+  color: var(--primary);
+}
+.back_to_home > span {
+  font-size: 18px;
+  color: var(--primary);
+  font-weight: 100;
+}
+.Login {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+.login__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  width: 100%;
+  flex-direction: column;
+  max-width: 400px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.login__container h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  color: var(--primary);
+  width: 100%;
+  text-align: center;
+}
+
+.login__container button svg {
+  width: 30px;
+  height: 30px;
+}
+.login__container button {
+  justify-content: space-between;
+  display: flex;
+  margin: 10px;
+  gap: 10px;
+  flex-direction: row;
+  align-items: center;
+}
+.login__container button span {
+  font-size: 18px;
+  width: 100%;
+}
+.login__container button {
+  background-color: white;
+
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+.login__container button:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+.user__info__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.user__info__container input[type="submit"] {
+  margin: 10px;
+  font-size: 18px;
+  padding: 8px 18px;
+  text-align: center;
+}
+
+.info__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+.info__container input {
+  outline: none;
+  border: none;
+  font-size: 18px;
+  margin: 5px 0px;
+  border-bottom: 1px solid var(--primary);
+}
+
+.info__container label {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 14px;
+  color: darkgray;
+}
+
+.signup__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup__container span {
+  width: 100%;
+  text-align: center;
+}
+
+.signup__container span a {
+  color: var(--primary);
+  cursor: pointer;
+}
+.signup__container span a:hover {
+  text-decoration: underline;
+}

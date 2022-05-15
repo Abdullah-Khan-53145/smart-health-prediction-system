@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 function Header() {
   const [hamclass, setHamclass] = useState("not-active");
@@ -41,10 +42,10 @@ function Header() {
               </li>
             </ul>
           </div>
-          <button className="btn__primary">
+          <Link to="/login" className="btn__primary">
             <span>Login</span>
             <small>as a Admin</small>
-          </button>
+          </Link>
         </div>
         <div className="hamburger__menu">
           <label for="check">
@@ -68,10 +69,10 @@ function Header() {
               </li>
             </ul>
           </div>
-          <button className="btn__primary">
+          <Link to="/login" className="btn__primary">
             <span>Login</span>
             <small>as a Admin</small>
-          </button>
+          </Link>
         </div>
       </div>
     </div>

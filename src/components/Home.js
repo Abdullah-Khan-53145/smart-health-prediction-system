@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./Header";
+import { Link } from "react-router-dom";
 import "./Home.css";
 function Home() {
   return (
@@ -19,8 +19,12 @@ function Home() {
             the patient to get instant guidance on their health issues
           </p>
           <div className="btns">
-            <button className="btn__primary">Signin as Patient</button>
-            <button className="btn__primary">Signin as Doctor</button>
+            <Link to="/login" className="btn__primary">
+              Signin as Patient
+            </Link>
+            <Link to="/login" className="btn__primary">
+              Signin as Doctor
+            </Link>
           </div>
         </div>
         <div className="right">
