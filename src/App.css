@@ -38,7 +38,7 @@
 }
 
 .loading {
-  position: absolute;
+  position: fixed;
   background-color: white;
   inset: 0;
   display: flex;

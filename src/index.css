@@ -27,6 +27,11 @@ a {
 li {
   list-style: none;
 }
+p {
+  line-height: 1.5rem;
+  color: gray;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

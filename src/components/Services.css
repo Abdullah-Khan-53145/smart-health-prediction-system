@@ -1,0 +1,69 @@
+.services__main {
+  background-color: rgb(248, 248, 248);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.line {
+  height: 1px;
+  width: 70px;
+  background-color: gray;
+}
+.circle {
+  height: 8px;
+  width: 8px;
+  border-radius: 50px;
+  background-color: var(--primary);
+}
+.saparator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.services__section h1 {
+  font-size: 64px;
+  color: gray;
+}
+
+.services__container {
+  display: flex;
+  justify-content: space-around;
+  padding: 30px;
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.service__card {
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.service__card h2 {
+  color: var(--primary);
+  text-align: center;
+  width: 100%;
+}
+
+.service__card svg {
+  height: 100px;
+  width: 100px;
+  color: var(--primary);
+}
+.service__card .icon {
+  width: 100%;
+}
+
+@media (max-width: 700px) {
+  .services__main {
+    margin-top: 180px;
+  }
+  .services__container {
+    flex-direction: column;
+  }
+}
