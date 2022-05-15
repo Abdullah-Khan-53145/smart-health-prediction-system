@@ -1,5 +1,15 @@
+.active_nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+  animation: nav_ani 0.3s;
+}
 .header {
   display: flex;
+
   padding: 10px 30px;
   margin: auto;
   justify-content: space-between;
@@ -28,6 +38,7 @@
   cursor: pointer;
 }
 .right_section .navlist ul li a {
+  color: gray;
   transition: 0.2s;
 }
 .right_section .navlist ul li a:hover {
@@ -62,7 +73,6 @@
 .header__section {
   width: 100%;
 }
-
 
 label {
   display: flex;
@@ -118,7 +128,11 @@ input[type="checkbox"]:checked ~ span:nth-of-type(3) {
   .hamburger__menu {
     display: block;
     position: inherit;
-    z-index: 100;
+    z-index: 1000;
+  }
+  .right_section {
+    position: fixed;
+    margin: 0;
   }
 }
 
@@ -133,6 +147,7 @@ input[type="checkbox"]:checked ~ span:nth-of-type(3) {
   flex-direction: column;
   transform: translateX(100%);
   transition: transform 0.2s;
+  z-index: 10;
 }
 .mobile__class ul {
   flex-direction: column;
@@ -151,4 +166,13 @@ input[type="checkbox"]:checked ~ span:nth-of-type(3) {
 
 .active {
   transform: translateX(0%);
+}
+
+@keyframes nav_ani {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
 }

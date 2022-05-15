@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import Services from "./components/Services";
 import Review from "./components/Review";
+import Footer from "./components/Footer";
+
 function App() {
   const [display, setDisplay] = useState("flex");
   useEffect(() => {
@@ -26,6 +28,7 @@ function App() {
       <Home />
       <Services />
       <Review />
+      <Footer />
     </div>
   );
 }

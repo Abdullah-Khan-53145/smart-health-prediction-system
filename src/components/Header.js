@@ -1,7 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.css";
 function Header() {
   const [hamclass, setHamclass] = useState("not-active");
+  const [show, handleShow] = useState(false);
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        handleShow(true);
+      } else {
+        handleShow(false);
+      }
+    });
+  }, []);
   const toggleNavBar = () => {
     if (hamclass === "not-active") {
       setHamclass("active");
@@ -12,7 +22,7 @@ function Header() {
   };
 
   return (
-    <div className="header__section">
+    <div className={`header__section ${show && "active_nav"}`}>
       <div className="header">
         <div className="left__section">
           <img src="./imgs/LogoSample_ByTailorBrands (2).jpg" alt="" />

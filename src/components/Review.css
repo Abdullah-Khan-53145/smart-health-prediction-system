@@ -2,7 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 100px;
+  position: relative;
+  z-index: -1;
+  padding: 100px 10px;
 }
 
 .reviews__container {
