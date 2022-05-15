@@ -78,7 +78,7 @@ function Login() {
         <div className="signup__container">
           <small>Don't have an acount?</small>
           <span>
-            <a href="#">Create Account</a>
+            <Link to="/signup">Create Account</Link>
           </span>
         </div>
       </div>
