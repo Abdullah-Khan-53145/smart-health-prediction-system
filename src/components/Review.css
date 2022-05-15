@@ -1,46 +1,55 @@
-.services__main {
+.reviews__main {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 100px 0px;
-  background-color: rgb(236, 236, 236);
+  padding: 100px;
 }
 
-.services__container {
+.reviews__container {
   display: flex;
   justify-content: space-around;
   padding: 30px;
   gap: 20px;
   max-width: 1200px;
   margin: auto;
+  background-attachment: fixed;
 }
 
-.service__card {
+.review__card {
   padding: 20px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  position: relative;
 }
-.service__card h2 {
+
+.review__card h2 {
   color: var(--primary);
   text-align: center;
+  font-weight: 100;
+  font-size: 18px;
+  width: 100%;
+}
+.review__card p {
+  font-weight: 100;
+  font-size: 14px;
   width: 100%;
 }
 
-.service__card svg {
+.review__card img {
   height: 100px;
   width: 100px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 4px solid var(--primary);
   color: var(--primary);
 }
-.service__card .icon {
+.review__card .icon {
   width: 100%;
 }
 
 @media (max-width: 700px) {
-  .services__container {
+  .reviews__container {
     flex-direction: column;
   }
 }

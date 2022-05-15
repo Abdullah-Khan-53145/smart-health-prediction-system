@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import Services from "./components/Services";
+import Review from "./components/Review";
 function App() {
   const [display, setDisplay] = useState("flex");
   useEffect(() => {
@@ -24,6 +25,7 @@ function App() {
       <Header />
       <Home />
       <Services />
+      <Review />
     </div>
   );
 }

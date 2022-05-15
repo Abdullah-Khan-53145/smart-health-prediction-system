@@ -4,7 +4,7 @@ function Services() {
   return (
     <div className="services__main">
       <div className="services__section">
-        <h1>Services</h1>
+        <h1 className="main_heading">Services</h1>
         <div className="saparator">
           <div className="line"></div>
           <div className="circle"></div>
