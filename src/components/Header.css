@@ -130,9 +130,13 @@ input[type="checkbox"]:checked ~ span:nth-of-type(3) {
     position: inherit;
     z-index: 1000;
   }
-  .right_section {
+
+  .active_nav {
+    animation: none;
+  }
+  .header__section {
     position: fixed;
-    margin: 0;
+    top: 0;
   }
 }
 

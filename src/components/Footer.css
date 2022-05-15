@@ -1,3 +1,98 @@
 .heading {
   color: red;
 }
+.footer {
+  background-color: var(--primary);
+  padding: 50px;
+}
+.footer .line {
+  background-color: white;
+}
+.footer .circle {
+  background-color: white;
+}
+.footer h2 {
+  text-align: start;
+  width: 100%;
+  color: white;
+}
+.footer p {
+  color: white;
+  text-align: start;
+  width: 100%;
+}
+.footer h3 {
+  display: flex;
+  gap: 10px;
+}
+.footer p {
+  font-weight: 100;
+}
+.footer h3 svg {
+  width: 20px;
+}
+
+.footer__container {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  color: white;
+  max-width: 1200px;
+  margin: auto;
+}
+.footer__container p {
+  color: white;
+  font-size: 12px;
+}
+.aboutUs__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+}
+.socials__card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 20px;
+}
+.logo svg {
+  width: 26px;
+  height: 26px;
+  margin: 0 10px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.logo svg:hover {
+  color: rgb(255, 183, 157);
+  transform: scale(1.2);
+}
+
+.end__text {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+h2.end__text {
+  font-size: 22px;
+  margin-top: 30px;
+}
+
+@media (max-width: 700px) {
+  .footer__container {
+    flex-direction: column;
+    padding: 50px 0px;
+    gap: 20px;
+  }
+  .aboutUs__card {
+    width: 100%;
+  }
+}
