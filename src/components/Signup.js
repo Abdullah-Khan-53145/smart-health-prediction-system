@@ -5,7 +5,7 @@ import "./Signup.css";
 function Signup() {
   return (
     <div className="Login">
-      <Link to="/" className="back_to_home">
+      <Link to="/gf" className="back_to_home">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5"
