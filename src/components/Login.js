@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 function Login() {
@@ -34,7 +34,7 @@ function Login() {
           <div className="info__container">
             <label htmlFor="password">Password</label>
             <input
-              type="text"
+              type="password"
               placeholder="Password"
               name="password"
               id="email"

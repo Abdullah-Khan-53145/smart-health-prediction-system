@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import "./Signup.css";
 function Signup() {
   return (
     <div className="Login">
-      <Link to="/gf" className="back_to_home">
+      <Link to="/" className="back_to_home">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5"
@@ -53,7 +53,7 @@ function Signup() {
           <div className="info__container">
             <label htmlFor="password">Password</label>
             <input
-              type="text"
+              type="password"
               placeholder="Password"
               name="password"
               id="password"
@@ -62,7 +62,7 @@ function Signup() {
           <div className="info__container">
             <label htmlFor="confrim_password">Confrim Password</label>
             <input
-              type="text"
+              type="password"
               placeholder="Confrim Password"
               name="confrim_password"
               id="confrim_password"

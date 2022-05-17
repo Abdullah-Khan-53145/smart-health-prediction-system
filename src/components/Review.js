@@ -4,7 +4,7 @@ function Review() {
   return (
     <div className="reviews__main">
       <div className="reviews__section">
-        <h1 className="main_heading">Recent Reviews</h1>
+        <h1 className="main_heading">Recent Feedbacks</h1>
         <div className="saparator">
           <div className="line"></div>
           <div className="circle"></div>
