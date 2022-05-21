@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { SignOutAPI } from "../actions";
-
+import Header from "./patientComponents/Header";
 function Patient(props) {
   // for navigation
   const navigate = useNavigate();
@@ -14,6 +14,7 @@ function Patient(props) {
   const { user } = props;
   return (
     <div>
+      <Header user={user} />
       <h1>
         Patient module (dummy just to check that the login and register is
         working properly)
