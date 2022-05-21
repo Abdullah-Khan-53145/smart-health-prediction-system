@@ -1,0 +1,102 @@
+._patient_home_main_container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(238, 238, 238);
+}
+._patient_home_module {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+._patient_upper_card > h1 {
+  color: var(--primary);
+  text-transform: uppercase;
+  width: 100%;
+  text-align: center;
+}
+._patient_upper_card > h2 {
+  color: gray;
+  text-transform: uppercase;
+  width: 50%;
+  font-weight: 100;
+  width: 100%;
+  text-align: center;
+}
+
+._patient_home__main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0px;
+  background-color: rgb(236, 236, 236);
+}
+
+._patient_home__container {
+  display: flex;
+  justify-content: space-around;
+  padding: 30px;
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+._patient_home__card {
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+._patient_home__card h2 {
+  color: var(--primary);
+  text-align: center;
+  width: 100%;
+}
+._patient_home__card h3 {
+  color: gray;
+  font-weight: 100;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+._patient_home__card svg {
+  height: 100px;
+  width: 100px;
+  color: var(--primary);
+}
+._patient_home__card .icon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 700px) {
+  ._patient_home__container {
+    flex-direction: column;
+  }
+  ._patient_upper_card > h2 {
+    padding: 0 30px;
+  }
+}
+
+._patient_home_get_started button {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  padding: 20px;
+}
+._patient_home_get_started button svg {
+  width: 30px;
+  height: 30px;
+}
+._patient_home_get_started button span {
+  width: 100px;
+}

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { SignOutAPI } from "../actions";
 import Header from "./patientComponents/Header";
+import Home from "./patientComponents/Home";
 import SideMenu from "./patientComponents/SideMenu";
 function Patient(props) {
   // for navigation
@@ -17,6 +18,7 @@ function Patient(props) {
     <div>
       <Header user={user} />
       <SideMenu user={user} />
+      <Home />
     </div>
   );
 }

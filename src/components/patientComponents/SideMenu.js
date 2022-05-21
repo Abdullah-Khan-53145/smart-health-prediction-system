@@ -9,7 +9,6 @@ function SideMenu(props) {
   const { user } = props;
 
   // states
-  const [sideMenuShow, setSideMenuShow] = useState(false);
   const navigate = useNavigate();
 
   const handleLogOut = () => {
