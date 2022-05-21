@@ -43,6 +43,12 @@
   text-align: center;
 }
 
+.login__container h2 {
+  color: var(--primary);
+  font-weight: 100;
+  font-size: 18px;
+  text-transform: uppercase;
+}
 .login__container button svg {
   width: 30px;
   height: 30px;

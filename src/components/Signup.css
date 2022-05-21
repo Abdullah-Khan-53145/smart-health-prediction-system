@@ -1,3 +1,24 @@
 .info__container label {
   width: 100%;
 }
+#profile__pic {
+  display: none;
+}
+
+.upload__profile {
+  text-align: center;
+  width: 120px;
+  text-transform: capitalize;
+  text-decoration: underline;
+  color: var(--primary);
+  margin: 10px 0px;
+}
+
+.user__info__container img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: var(--primary);
+  padding: 5px;
+}

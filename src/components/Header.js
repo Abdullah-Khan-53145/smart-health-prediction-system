@@ -42,13 +42,13 @@ function Header() {
               </li>
             </ul>
           </div>
-          <Link to="/login" className="btn__primary">
+          <Link to="/login-admin" className="btn__primary">
             <span>Login</span>
             <small>as a Admin</small>
           </Link>
         </div>
         <div className="hamburger__menu">
-          <label for="check">
+          <label htmlFor="check">
             <input type="checkbox" id="check" onClick={toggleNavBar} />
             <span></span>
             <span></span>
@@ -69,7 +69,7 @@ function Header() {
               </li>
             </ul>
           </div>
-          <Link to="/login" className="btn__primary">
+          <Link to="/login-admin" className="btn__primary">
             <span>Login</span>
             <small>as a Admin</small>
           </Link>

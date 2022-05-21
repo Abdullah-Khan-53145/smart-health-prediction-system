@@ -15,12 +15,13 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <div className="loading" style={{ display: display }}>
+      <div className="loading " style={{ display: display }}>
         <div>
-          <div class="rhombus2">
-            <div class="circle21"></div>
-            <div class="circle22"></div>
-          </div>
+          <img
+            src="https://thumbs.gfycat.com/DearestWeakBantamrooster-max-1mb.gif"
+            alt=""
+          />
+
           <p>LOADING ...</p>
         </div>
       </div>

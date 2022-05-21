@@ -19,10 +19,10 @@ function Home() {
             the patient to get instant guidance on their health issues
           </p>
           <div className="btns">
-            <Link to="/login" className="btn__primary">
+            <Link to="/login-patient" className="btn__primary">
               Signin as Patient
             </Link>
-            <Link to="/login" className="btn__primary">
+            <Link to="/login-doctor" className="btn__primary">
               Signin as Doctor
             </Link>
           </div>
