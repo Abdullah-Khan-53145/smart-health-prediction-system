@@ -29,6 +29,7 @@ function Login(props) {
       message: "",
     });
     signInWithGoogle();
+    navigate("/patient");
   };
 
   const LoginWithEmailPassword = (e) => {
