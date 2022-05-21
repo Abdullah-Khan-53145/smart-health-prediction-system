@@ -23,13 +23,24 @@ function Login(props) {
 
   //functions
   const LoginWithGoogle = () => {
+    setLoading(true);
     setError({
       password: false,
       email: false,
       message: "",
     });
-    signInWithGoogle();
-    navigate("/patient");
+    signInWithGoogle()
+      .then((res) => {
+        setLoading(false);
+        navigate("/patient");
+      })
+      .catch((error) => {
+        setError({
+          password: true,
+          email: false,
+          message: "Some error occured",
+        });
+      });
   };
 
   const LoginWithEmailPassword = (e) => {

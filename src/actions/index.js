@@ -11,6 +11,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth, provider } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 // actions
 // action to update a global redux state with user from google authentication from firebase
@@ -38,10 +39,13 @@ export const setPasswordLenValidation = (status) => ({
 // as by name a action for signing in the user from firebase authentication
 export function SignInWithGoogleAPI() {
   return async (dispatch) => {
+    setLoading(true);
     const result = await signInWithPopup(auth, provider);
     localStorage.setItem("user", JSON.stringify(result.user));
     dispatch(setUser(JSON.parse(localStorage.getItem("user"))));
     console.log(result.user);
+
+    setLoading(false);
   };
 }
 
