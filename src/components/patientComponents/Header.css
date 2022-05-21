@@ -15,6 +15,7 @@
 ._header__containter ._right {
   justify-content: space-around;
   display: flex;
+  position: relative;
   gap: 1px;
 }
 ._header__containter .mid {
@@ -23,24 +24,29 @@
   align-items: center;
 }
 
-._header__containter .left button {
+._header__containter .left ._btn_ {
   background-color: var(--primary);
   border: none;
+  height: 100%;
+  width: 60px;
+  font-size: 14px;
+  font-weight: 100;
+  color: white;
+  cursor: pointer;
+}
+._header__containter ._right ._btn_ {
+  background-color: var(--primary);
+  border: none;
+  cursor: pointer;
   height: 100%;
   width: 60px;
   font-size: 14px;
   font-weight: 100;
   color: white;
 }
-._header__containter ._right button {
-  background-color: var(--primary);
-  border: none;
-
-  height: 100%;
-  width: 60px;
-  font-size: 14px;
-  font-weight: 100;
-  color: white;
+._header__containter .left ._btn_:hover,
+._header__containter ._right ._btn_:last-child:hover {
+  opacity: 0.8;
 }
 ._header__containter ._right svg {
   height: 40px;
@@ -53,4 +59,69 @@
   object-fit: cover;
   padding: 3px;
   background-color: white;
+}
+
+._header__containter ._right .profile:hover ._user__info {
+  display: flex;
+}
+._user__info .open {
+  height: 30px;
+  position: absolute;
+  width: 100%;
+  top: -25px;
+}
+._user__info {
+  position: absolute;
+  background-color: var(--secondary);
+  display: flex;
+  flex-direction: column;
+  top: 80px;
+  right: 30px;
+  display: none;
+}
+._user__info .ref__btn {
+  position: absolute;
+  background-color: var(--secondary);
+  display: flex;
+  flex-direction: column;
+  width: 25px;
+  height: 25px;
+  top: 12px;
+  left: 120px;
+  z-index: -1;
+  transform: rotate(45deg);
+}
+._user__info ._btn_user {
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary);
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+._user__info ._btn_user:hover {
+  opacity: 0.8;
+}
+._user__info ._btn_user > svg {
+  width: 18px;
+}
+._user__info > h2 {
+  font-size: 14px;
+  color: black;
+  margin-top: 5px;
+  font-weight: 100;
+  padding: 0px 10px;
+  margin-top: 10px;
+}
+._user__info > h2 > b {
+  font-size: 18px;
+  color: var(--primary);
+}
+._user__info small {
+  font-size: 12px;
+  padding: 0px 10px;
+  margin-bottom: 10px;
+  color: var(--primary);
 }

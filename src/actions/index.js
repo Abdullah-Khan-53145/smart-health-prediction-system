@@ -4,6 +4,7 @@ import {
   SET_ERROR,
   SET_EMAIL_VALIDATION,
   SET_PASSWORD_LENGTH_VALIDATION,
+  TOGGLE_SIDE_MENU,
 } from "./actionTypes";
 import {
   signInWithPopup,
@@ -24,18 +25,12 @@ export const setLoading = (status) => ({
   type: SET_LOADING,
   payload: status,
 });
-export const setError = (status) => ({
-  type: SET_ERROR,
+
+export const toggleSideMenu = (status) => ({
+  type: TOGGLE_SIDE_MENU,
   payload: status,
 });
-export const setEmailValidation = (status) => ({
-  type: SET_EMAIL_VALIDATION,
-  payload: status,
-});
-export const setPasswordLenValidation = (status) => ({
-  type: SET_PASSWORD_LENGTH_VALIDATION,
-  payload: status,
-});
+
 // as by name a action for signing in the user from firebase authentication
 export function SignInWithGoogleAPI() {
   return async (dispatch) => {
