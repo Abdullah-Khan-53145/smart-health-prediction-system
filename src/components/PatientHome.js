@@ -5,7 +5,11 @@ import { SignOutAPI } from "../actions";
 import Header from "./patientComponents/Header";
 import Home from "./patientComponents/Home";
 import SideMenu from "./patientComponents/SideMenu";
-function Patient(props) {
+import AccountSetting from "./patientComponents/AccountSetting";
+import PredictDisease from "./patientComponents/PredictDisease";
+import PatientRecord from "./PatientRecord";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+function PatientHome(props) {
   // for navigation
   const navigate = useNavigate();
   // functions
@@ -30,4 +34,4 @@ const dispatchStateToProps = (dispatch) => ({
   signOut: () => dispatch(SignOutAPI()),
 });
 
-export default connect(mapStateToProps, dispatchStateToProps)(Patient);
+export default connect(mapStateToProps, dispatchStateToProps)(PatientHome);

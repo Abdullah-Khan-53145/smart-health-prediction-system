@@ -1,16 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toggleSideMenu } from "../../actions";
 import { SignOutAPI } from "../../actions";
 import "./SideMenu.css";
 
 function SideMenu(props) {
   const { user } = props;
+  const [activeButton, setActiveButton] = useState({
+    home: false,
+    disease: false,
+    record: false,
+    setting: false,
+  });
 
   // states
   const navigate = useNavigate();
-
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === "/patient/home") {
+      setActiveButton({ ...activeButton, home: true });
+    } else if (location.pathname === "/patient/record") {
+      setActiveButton({ ...activeButton, record: true });
+    } else if (location.pathname === "/patient/disease") {
+      setActiveButton({ ...activeButton, disease: true });
+    } else if (location.pathname === "/patient/setting") {
+      setActiveButton({ ...activeButton, setting: true });
+    }
+  }, [location.pathname]);
   const handleLogOut = () => {
     props.signOut();
     navigate("/");
@@ -52,7 +70,15 @@ function SideMenu(props) {
         <small>{user.email}</small>
       </h2>
       <div className="_side_menu_buttons">
-        <button className="_side_menu_button">
+        <Link
+          to="/patient/home"
+          style={{
+            backgroundColor: activeButton.home
+              ? "var(--tertiary)"
+              : "var(--secondary)",
+          }}
+          className="_side_menu_button"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"
@@ -62,8 +88,16 @@ function SideMenu(props) {
             <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
           </svg>
           <span>Home</span>{" "}
-        </button>
-        <button className="_side_menu_button">
+        </Link>
+        <Link
+          style={{
+            backgroundColor: activeButton.disease
+              ? "var(--tertiary)"
+              : "var(--secondary)",
+          }}
+          to="/patient/disease"
+          className="_side_menu_button"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"
@@ -77,8 +111,16 @@ function SideMenu(props) {
             />
           </svg>
           <span>Predict disease</span>{" "}
-        </button>
-        <button className="_side_menu_button">
+        </Link>
+        <Link
+          style={{
+            backgroundColor: activeButton.record
+              ? "var(--tertiary)"
+              : "var(--secondary)",
+          }}
+          to="/patient/record"
+          className="_side_menu_button"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"
@@ -93,8 +135,16 @@ function SideMenu(props) {
             />
           </svg>
           <span>Previous Record</span>{" "}
-        </button>
-        <button className="_side_menu_button">
+        </Link>
+        <Link
+          style={{
+            backgroundColor: activeButton.setting
+              ? "var(--tertiary)"
+              : "var(--secondary)",
+          }}
+          to="/patient/setting"
+          className="_side_menu_button"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"
@@ -108,7 +158,7 @@ function SideMenu(props) {
             />
           </svg>
           <span>Settings</span>{" "}
-        </button>
+        </Link>
         <button className="_side_menu_button" onClick={handleLogOut}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -1,6 +1,7 @@
 :root {
   --primary: rgb(255, 120, 108);
   --secondary: rgb(255, 226, 224);
+  --tertiary: rgb(255, 244, 244);
 }
 /* utility classes */
 .btn__primary {

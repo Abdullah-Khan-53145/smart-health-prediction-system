@@ -1,6 +1,8 @@
 ._Side__menu {
   background-color: var(--secondary);
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -98,20 +100,9 @@
   border-bottom: 1px solid var(--primary);
   position: relative;
 }
-._side_menu_buttons ._side_menu_button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  z-index: -1;
-  opacity: 0;
-  transition: 0.3s;
-}
-._side_menu_button:hover::before {
-  opacity: 0.6;
+
+._side_menu_button:hover {
+  background-color: var(--tertiary);
 }
 ._side_menu_buttons ._side_menu_button svg {
   height: 30px;
