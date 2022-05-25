@@ -1,29 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./PredictDisease.css";
 import Header from "./Header";
 import SideMenu from "./SideMenu";
+import DiseaseModal from "./DiseaseModal";
 import { connect } from "react-redux";
-function PredictDisease(props) {
-  //dummy Deases to make the other logic
-  const symthoms = [
-    {
-      sym: ["symA1", "symA2", "symC3"],
-      disease: "Disease A",
-    },
-    {
-      sym: ["symB1", "symB2", "symB3"],
-      disease: "Disease B",
-    },
-    {
-      sym: ["symC1", "symC2", "symC3"],
-      disease: "Disease C",
-    },
-    {
-      sym: ["symD1", "symD2", "symC3"],
-      disease: "Disease D",
-    },
-  ];
+import { toggleModal } from "../../actions";
+import { db } from "../../firebase";
+import { doc, onSnapshot } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 
+function PredictDisease(props) {
   // states
 
   const [suspectedDiseases, SetSuspectedDiseases] = useState([]);
@@ -33,13 +19,27 @@ function PredictDisease(props) {
   const [styleSecondForm, setStyleSecondForm] = useState({});
   const [finalRecord, setFinalRecord] = useState({});
 
+  const addToDataBase = async (data) => {
+    const docRef = await addDoc(collection(db, "pateintRecord"), {
+      data,
+    });
+    console.log("Document written with ID: ", docRef.id);
+  };
+  const [symthoms, setSym] = useState([]);
+  //dummy Deases to make the other logic
+  useEffect(() => {
+    onSnapshot(collection(db, "diseasesDB"), (snapshot) => {
+      setSym(snapshot.docs.map((doc) => doc.data()));
+    });
+  });
+
   //event handlers
   const handlefirstSubmit = (e) => {
     e.preventDefault();
     const symarr = [];
-    symthoms.forEach((element) => {
-      if (element.sym.includes(firstSym)) {
-        symarr.push(element);
+    symthoms.map((element) => {
+      if (element.element.sym.includes(firstSym)) {
+        symarr.push(element.element);
       }
     });
     SetSuspectedDiseases(symarr);
@@ -72,25 +72,29 @@ function PredictDisease(props) {
         });
       }, 260);
     }, 260);
-    console.log(finalOption);
-    console.log(suspectedDiseases);
+    let finaldata = {};
     suspectedDiseases.forEach((element) => {
       if ((element.disease = finalOption)) {
         let date = new Date().toLocaleString();
-        let finaldata = {
+        finaldata = {
           disease: finalOption,
-          syms: element.sym,
+          syms: element.sym.toString(),
           patientName: user.displayName,
           dateTime: date,
         };
-        setFinalRecord(finaldata);
       }
     });
-    console.log(finalRecord);
+    setFinalRecord(finaldata);
+    if (suspectedDiseases.length !== 0) {
+      addToDataBase(finaldata);
+      props.toggleModal(true);
+    }
   };
   const { user } = props;
   return (
     <div className="_patient_predict_disease_section">
+      <DiseaseModal diseaseObj={finalRecord} />
+
       <Header user={user} />
       <SideMenu user={user} />
       <h1 className="test_predict_section">Predict disease</h1>
@@ -124,7 +128,7 @@ function PredictDisease(props) {
         </div>
         {suspectedDiseases.length !== 0 ? (
           suspectedDiseases.map((element, index) => (
-            <div className="sym_selector">
+            <div key={index} className="sym_selector">
               <label htmlFor={`sym_${index}`}>
                 {element.sym.map((syms, symI) => {
                   if (symI !== element.sym.length - 1) {
@@ -184,7 +188,12 @@ function PredictDisease(props) {
 }
 
 const mapStateToProps = (state) => ({
+  showModal: state.toggleModalState.showModal,
   user: state.userState.user,
 });
 
-export default connect(mapStateToProps)(PredictDisease);
+const mapDispatchToProps = (dispatch) => ({
+  toggleModal: (status) => dispatch(toggleModal(status)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PredictDisease);

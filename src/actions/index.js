@@ -5,6 +5,7 @@ import {
   SET_EMAIL_VALIDATION,
   SET_PASSWORD_LENGTH_VALIDATION,
   TOGGLE_SIDE_MENU,
+  TOGGLE_MODAL,
 } from "./actionTypes";
 import {
   signInWithPopup,
@@ -28,6 +29,10 @@ export const setLoading = (status) => ({
 
 export const toggleSideMenu = (status) => ({
   type: TOGGLE_SIDE_MENU,
+  payload: status,
+});
+export const toggleModal = (status) => ({
+  type: TOGGLE_MODAL,
   payload: status,
 });
 
