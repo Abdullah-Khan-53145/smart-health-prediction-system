@@ -12,7 +12,9 @@ function PatientRecord(props) {
     getDocs(collection(db, "pateintRecord")).then((querySnapshot) => {
       let recordArr = [];
       querySnapshot.forEach((doc) => {
-        recordArr.push(doc.data());
+        if (doc.data().data.email === user.email) {
+          recordArr.push(doc.data());
+        }
       });
       setRecord(recordArr);
       console.log(record);
