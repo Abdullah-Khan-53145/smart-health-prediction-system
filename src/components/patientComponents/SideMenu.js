@@ -71,6 +71,7 @@ function SideMenu(props) {
       </h2>
       <div className="_side_menu_buttons">
         <Link
+          onClick={() => props.toggleSideMenu(false)}
           to="/patient/home"
           style={{
             backgroundColor: activeButton.home
@@ -90,6 +91,7 @@ function SideMenu(props) {
           <span>Home</span>{" "}
         </Link>
         <Link
+          onClick={() => props.toggleSideMenu(false)}
           style={{
             backgroundColor: activeButton.disease
               ? "var(--tertiary)"
@@ -113,6 +115,7 @@ function SideMenu(props) {
           <span>Predict disease</span>{" "}
         </Link>
         <Link
+          onClick={() => props.toggleSideMenu(false)}
           style={{
             backgroundColor: activeButton.record
               ? "var(--tertiary)"
@@ -137,6 +140,7 @@ function SideMenu(props) {
           <span>Previous Record</span>{" "}
         </Link>
         <Link
+          onClick={() => props.toggleSideMenu(false)}
           style={{
             backgroundColor: activeButton.setting
               ? "var(--tertiary)"

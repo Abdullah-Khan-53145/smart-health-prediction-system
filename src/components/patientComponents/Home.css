@@ -2,7 +2,6 @@
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
   background-color: rgb(238, 238, 238);
 }
 ._patient_home_module {
@@ -10,6 +9,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 100px;
 }
 
 ._patient_upper_card > h1 {

@@ -1,6 +1,89 @@
 .test_predict_section {
   margin-top: 100px;
-
   text-transform: uppercase;
   color: var(--primary);
+}
+._patient_predict_disease_section h2 {
+  color: gray;
+  text-transform: uppercase;
+  font-size: 22px;
+  font-weight: 100;
+}
+
+.symthoms__form {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  margin: auto;
+  margin-top: 20px;
+  padding: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  gap: 20px;
+}
+.symthoms__form input[type="text"] {
+  outline: none;
+  border: none;
+  border-bottom: 2px solid var(--primary);
+  font-size: 18px;
+  background-color: var(--tertiary);
+  padding: 5px;
+}
+.symthoms__form input[type="submit"] {
+  outline: none;
+  border: none;
+  border-bottom: 2px solid var(--primary);
+  font-size: 18px;
+  padding: 5px;
+  text-align: center;
+  flex-direction: row;
+  justify-content: center;
+  width: 200px;
+}
+
+.label_first_symthom {
+  width: 100%;
+  font-size: 18px;
+  color: var(--primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+}
+.form_selector input[type="submit"] {
+  margin: auto;
+}
+.form_selector {
+  transform: scale(0);
+  opacity: 0;
+  
+}
+.sym_selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sym_selector label {
+  width: 100%;
+  color: gray;
+  text-transform: uppercase;
+}
+
+@keyframes form-off {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+@keyframes form-on {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
