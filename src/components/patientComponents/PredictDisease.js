@@ -27,11 +27,11 @@ function PredictDisease(props) {
   // states
 
   const [suspectedDiseases, SetSuspectedDiseases] = useState([]);
-  const [index, setIndex] = useState(0);
+  const [finalOption, setfinalOption] = useState(0);
   const [firstSym, setFirstSym] = useState("");
   const [styleForm, setStyleForm] = useState({});
-
-  //functions
+  const [styleSecondForm, setStyleSecondForm] = useState({});
+  const [finalRecord, setFinalRecord] = useState({});
 
   //event handlers
   const handlefirstSubmit = (e) => {
@@ -42,18 +42,51 @@ function PredictDisease(props) {
         symarr.push(element);
       }
     });
-    console.log(symarr, e.target.value, firstSym);
     SetSuspectedDiseases(symarr);
 
     e.target.style.animation = "form-off .3s ease-in";
 
     setTimeout(() => {
       e.target.style.display = "none";
-      setStyleForm({ animation: "form-on 0.3s ease-in-out" });
+      setStyleForm({ display: "flex", animation: "form-on 0.3s ease-in-out" });
       setTimeout(() => {
         setStyleForm({ transform: "scale(1)", opacity: "1" });
       }, 260);
     }, 260);
+  };
+
+  const handleLastSubmit = (e) => {
+    e.preventDefault();
+    e.target.style.animation = "form-off .3s ease-in";
+    setFirstSym("");
+    setTimeout(() => {
+      e.target.style.display = "none";
+      setStyleSecondForm({
+        display: "flex",
+        animation: "form-on 0.3s ease-in-out",
+      });
+      setTimeout(() => {
+        setStyleSecondForm({
+          transform: "scale(1)",
+          opacity: "1",
+        });
+      }, 260);
+    }, 260);
+    console.log(finalOption);
+    console.log(suspectedDiseases);
+    suspectedDiseases.forEach((element) => {
+      if ((element.disease = finalOption)) {
+        let date = new Date().toLocaleString();
+        let finaldata = {
+          disease: finalOption,
+          syms: element.sym,
+          patientName: user.displayName,
+          dateTime: date,
+        };
+        setFinalRecord(finaldata);
+      }
+    });
+    console.log(finalRecord);
   };
   const { user } = props;
   return (
@@ -62,7 +95,12 @@ function PredictDisease(props) {
       <SideMenu user={user} />
       <h1 className="test_predict_section">Predict disease</h1>
       <h2>Enter the symptom in below form and they should be valid</h2>
-      <form onSubmit={handlefirstSubmit} action="" className="symthoms__form">
+      <form
+        onSubmit={handlefirstSubmit}
+        style={styleSecondForm}
+        action=""
+        className="symthoms__form"
+      >
         <label className="label_first_symthom" htmlFor="start_symthon">
           Enter Any one Symthom
         </label>
@@ -72,58 +110,74 @@ function PredictDisease(props) {
           onChange={(e) => setFirstSym(e.target.value)}
           placeholder="Enter symptom"
           type="text"
-          required
         />
         <input className="btn__primary" type="submit" value="Next" />
       </form>
       <form
         style={styleForm}
+        onSubmit={handleLastSubmit}
         action=""
         className="symthoms__form form_selector"
       >
         <div className="label_first_symthom" htmlFor="start_symthon">
           Select One
         </div>
-        {suspectedDiseases ? (
+        {suspectedDiseases.length !== 0 ? (
           suspectedDiseases.map((element, index) => (
             <div className="sym_selector">
-              <label htmlFor="sym_1">{element.sym}</label>
+              <label htmlFor={`sym_${index}`}>
+                {element.sym.map((syms, symI) => {
+                  if (symI !== element.sym.length - 1) {
+                    return `${syms}  , `;
+                  } else {
+                    return `${syms}`;
+                  }
+                })}
+              </label>
               <input
                 required
                 placeholder="Enter symptom"
-                id="sym_1"
-                name="sym"
+                id={`sym_${index}`}
+                value={element.disease}
+                onChange={(e) => {
+                  setfinalOption(e.target.value);
+                }}
+                name="finalOption"
                 type="radio"
-                required
               />
             </div>
           ))
         ) : (
-          <div>Sorry this type of disease is unavailable in our db</div>
+          <div className="sym_selector">
+            <label htmlFor="asd">Sorry disease not found</label>
+          </div>
         )}
-        <div className="sym_selector">
-          <label htmlFor="sym_2">Symptom B</label>
+
+        {suspectedDiseases.length !== 0 && (
+          <div className="sym_selector">
+            <label htmlFor="None_of_above">None of above</label>
+            <input
+              placeholder="Enter symptom"
+              id="None_of_above"
+              value="not present in out database try again later"
+              onChange={(e) => {
+                setfinalOption(e.target.value);
+              }}
+              name="finalOption"
+              type="radio"
+              required
+            />
+          </div>
+        )}
+        {suspectedDiseases.length !== 0 ? (
           <input
-            required
-            placeholder="Enter symptom"
-            id="sym_2"
-            name="sym"
-            type="radio"
-            required
+            className="btn__primary"
+            type="submit"
+            value="Predict Disease"
           />
-        </div>
-        <div className="sym_selector">
-          <label htmlFor="sym_3">Symptom C</label>
-          <input
-            required
-            placeholder="Enter symptom"
-            id="sym_3"
-            name="sym"
-            type="radio"
-            required
-          />
-        </div>
-        <input className="btn__primary" type="submit" value="Next" />
+        ) : (
+          <input className="btn__primary" type="submit" value="Back" />
+        )}
       </form>
     </div>
   );
