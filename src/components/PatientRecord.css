@@ -1,17 +1,19 @@
 .test_patient_record_section {
   margin-top: 100px;
   text-transform: uppercase;
+
   color: var(--primary);
 }
 .patient__record {
-  margin: 100px;
+  max-width: 800px;
+  width: 100%;
+  margin: auto;
 }
 
 /* 
 Generic Styling, for Desktops/Laptops 
 */
 table {
-  width: 100%;
   border-collapse: collapse;
 }
 /* Zebra striping */
@@ -35,11 +37,9 @@ th {
   /* Force table to not be like tables anymore */
   .patient__record {
     margin: 10px;
-    margin-bottom: 30px;
+    width: inherit;
   }
-  table {
-    margin-top: 20px;
-  }
+
   table,
   thead,
   tbody,
@@ -73,8 +73,7 @@ th {
     /* Top/left values mimic padding */
     top: 6px;
     left: 6px;
-    width: 100%;
-    padding-right: 10px;
+    width: 90%;
   }
 
   /*

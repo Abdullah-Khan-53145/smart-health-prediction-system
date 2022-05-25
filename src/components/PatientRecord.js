@@ -14,10 +14,10 @@ function PatientRecord(props) {
       querySnapshot.forEach((doc) => {
         if (doc.data().data.email === user.email) {
           recordArr.push(doc.data());
+          console.log(doc.data());
         }
       });
       setRecord(recordArr);
-      console.log(record);
     });
     // eslint-disable-next-line
   }, []);
@@ -27,6 +27,7 @@ function PatientRecord(props) {
       <SideMenu user={user} />
       <div className="patient__record">
         <h1 className="test_patient_record_section">This is Patient Record</h1>
+
         <table>
           <thead>
             <tr>

@@ -80,7 +80,7 @@ function PredictDisease(props) {
           disease: finalOption,
           syms: element.sym.toString(),
           patientName: user.displayName,
-          patientEmail: user.email,
+          email: user.email,
           dateTime: date,
         };
       }
