@@ -382,7 +382,7 @@ function Signup(props) {
               <div className="signup__container">
                 <small>Already have an acount?</small>
                 <span>
-                  <Link to="/login">Sign in</Link>
+                  <Link to="/login-patient">Sign in</Link>
                 </span>
               </div>
             </>
