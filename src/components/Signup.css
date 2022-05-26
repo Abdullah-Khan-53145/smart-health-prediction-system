@@ -1,5 +1,6 @@
 .info__container label {
   width: 100%;
+  text-align: start;
 }
 #profile__pic {
   display: none;

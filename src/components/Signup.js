@@ -247,7 +247,7 @@ function Signup(props) {
           <form className="user__info__container" onSubmit={handleSignUp}>
             {profilePicture ? (
               <img src={URL.createObjectURL(profilePicture)} alt="" />
-            ) : user.photoURL ? (
+            ) : user && user.photoURL ? (
               <img src={user.photoURL} alt="" />
             ) : (
               <img
