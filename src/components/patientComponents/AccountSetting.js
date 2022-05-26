@@ -2,14 +2,23 @@ import React from "react";
 import Header from "./Header";
 import SideMenu from "./SideMenu";
 import { connect } from "react-redux";
+import Signup from "../Signup";
 import "./AccountSetting.css";
 function AccountSetting(props) {
   const { user } = props;
   return (
-    <div>
+    <div className="__account__setting">
       <Header user={user} />
       <SideMenu user={user} />
-      <h1 className="test_acount_setting_section">This is Account settings</h1>
+      <Signup
+        userinfo={{
+          name: user.displayName,
+          email: user.email,
+          profilePicture: user.photoURL,
+        }}
+        heading="Edit Account"
+        role="editAccount"
+      />
     </div>
   );
 }

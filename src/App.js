@@ -45,7 +45,7 @@ function App() {
             <Route
               exact
               path="/signup-patient"
-              element={<Signup role="patient" />}
+              element={<Signup role="register" heading="signup" />}
             ></Route>
             <Route
               exact

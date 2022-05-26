@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Home.css";
 function Home() {
   return (
@@ -80,7 +81,11 @@ function Home() {
             </div>
           </div>
           <div className="_patient_home_get_started">
-            <button className="btn__primary" style={{ display: "flex" }}>
+            <Link
+              to="/patient/disease"
+              className="btn__primary btn__started"
+              style={{ display: "flex" }}
+            >
               <span>Get Started</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +99,7 @@ function Home() {
                   clipRule="evenodd"
                 />
               </svg>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

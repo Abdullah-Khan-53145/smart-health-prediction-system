@@ -38,7 +38,7 @@ function PredictDisease(props) {
     e.preventDefault();
     const symarr = [];
     symthoms.map((element) => {
-      if (element.element.sym.includes(firstSym)) {
+      if (element.element.sym.includes(firstSym.toLowerCase())) {
         symarr.push(element.element);
       }
     });

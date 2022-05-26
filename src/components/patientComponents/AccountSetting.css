@@ -3,3 +3,6 @@
   text-transform: uppercase;
   color: var(--primary);
 }
+.__account__setting label {
+  text-align: start;
+}

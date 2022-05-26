@@ -85,7 +85,7 @@
   }
 }
 
-._patient_home_get_started button {
+._patient_home_get_started .btn__started {
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -93,10 +93,10 @@
   font-size: 18px;
   padding: 20px;
 }
-._patient_home_get_started button svg {
+._patient_home_get_started .btn__started svg {
   width: 30px;
   height: 30px;
 }
-._patient_home_get_started button span {
+._patient_home_get_started .btn__started span {
   width: 100px;
 }

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+
 import { storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { connect } from "react-redux";
@@ -14,11 +15,13 @@ function Signup(props) {
   // navigator
   const navigation = useNavigate();
   // props destructuring
-  const { setLoading, signIn } = props;
+  const { setLoading, signIn, heading, role, user } = props;
   // states
   const [profilePicture, setProfilePicture] = useState("");
-  const [displayName, setDisplayName] = useState("");
-  const [email, setEmail] = useState("");
+  const [displayName, setDisplayName] = useState(
+    `${user ? user.displayName : ""}`
+  );
+  const [email, setEmail] = useState(`${user ? user.email : ""}`);
   const [password, setPassword] = useState("");
   const [confrimPassword, setConfrimPassword] = useState("");
   const [passwordValidation, setPasswordValidation] = useState("white");
@@ -27,7 +30,12 @@ function Signup(props) {
   const [error, setError] = useState("");
 
   // functions
-
+  useEffect(() => {
+    if (user === null && role === "editAccount") {
+      navigation("/home");
+    }
+    // eslint-disable-next-line
+  }, []);
   // Function to register the user to firebase with profile picture and Display Name using storage
   const registerUser = (user) => {
     setLoading(true);
@@ -108,6 +116,67 @@ function Signup(props) {
         }
       });
   };
+  const UpdateUser = (user) => {
+    setLoading(true);
+
+    if (profilePicture !== "") {
+      const metadata = {
+        contentType: "image/jpeg",
+      };
+      const upload = ref(storage, `user/${profilePicture.name}`);
+      const uploadTask = uploadBytesResumable(upload, profilePicture, metadata);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(progress);
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+            default:
+              console.log("zero");
+              break;
+          }
+        },
+        (error) => console.log(error, "error uploading image"),
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            updateProfile(auth.currentUser, {
+              displayName: user.displayName,
+              email: email,
+              photoURL: downloadURL,
+            })
+              .then((user) => {
+                setLoading(false);
+                signIn(auth.currentUser);
+              })
+              .catch((error) => {
+                setLoading(false);
+                const errorCode = error.code;
+                const errorMessage = error.message.substr(10);
+                console.log(errorCode, "\n", errorMessage, "this one");
+                console.log(errorCode, error.message);
+                if (errorCode === "auth/email-already-in-use") {
+                  setEmailValidation(true);
+                  console.log("hello");
+                } else if (errorCode === "auth/weak-password") {
+                  setpasswordLenValidation(true);
+                  console.log("hello");
+                } else {
+                  setError(errorCode);
+                }
+              });
+          });
+        }
+      );
+    }
+  };
 
   // function to display the selected profilr picture from computer on the page in real time
   const handleChange = (e) => {
@@ -131,7 +200,11 @@ function Signup(props) {
         password: password,
         displayName: displayName,
       };
-      registerUser(user);
+      if (role === "register") {
+        registerUser(user);
+      } else {
+        UpdateUser(user);
+      }
     } else {
       setError("Profile picture required, ");
     }
@@ -170,10 +243,12 @@ function Signup(props) {
           <span>Back</span>
         </Link>
         <div className="login__container">
-          <h1>Sign up</h1>
+          <h1>{heading}</h1>
           <form className="user__info__container" onSubmit={handleSignUp}>
             {profilePicture ? (
               <img src={URL.createObjectURL(profilePicture)} alt="" />
+            ) : user.photoURL ? (
+              <img src={user.photoURL} alt="" />
             ) : (
               <img
                 src="https://allworldpm.com/wp-content/uploads/2016/10/230x230-avatar-dummy-profile-pic.jpg"
@@ -189,11 +264,13 @@ function Signup(props) {
               onChange={handleChange}
             />
             <label className="upload__profile" htmlFor="profile__pic">
-              upload profile
+              {role === "register" ? "upload profile" : "Change profile"}
             </label>
 
             <div className="info__container">
-              <label htmlFor="first_name">Full Name</label>
+              <label htmlFor="first_name">
+                {role === "register" ? "Full Name" : "Edit Name"}
+              </label>
               <input
                 required
                 type="text"
@@ -207,100 +284,109 @@ function Signup(props) {
               />
             </div>
 
-            <div className="info__container">
-              <label htmlFor="email">Email</label>
-              <input
-                required
-                type="email"
-                placeholder="name@example.com"
-                name="email"
-                id="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
-              {emailValidation && (
-                <small style={{ color: "red" }}>Email already in use</small>
-              )}
-            </div>
-            <div className="info__container">
-              <label htmlFor="password">Password</label>
-              <input
-                required
-                type="password"
-                placeholder="Password"
-                name="password"
-                id="password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
-              {passwordLenValidation && (
-                <small style={{ color: "red" }}>
-                  Password should be at least 6 characters.
-                </small>
-              )}
-            </div>
-            <div className="info__container">
-              <label htmlFor="confrim_password">Confrim Password</label>
-              <input
-                required
-                type="password"
-                placeholder="Confrim Password"
-                name="confrim_password"
-                id="confrim_password"
-                value={confrimPassword}
-                onChange={(e) => {
-                  setConfrimPassword(e.target.value);
-                  if (confrimPassword.length !== 0) {
-                    if (e.target.value === password) {
-                      setPasswordValidation("green");
-                    } else {
-                      setPasswordValidation("red");
-                    }
-                  }
-                }}
-              />
+            {role === "register" && (
+              <>
+                <div className="info__container">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    required
+                    type="email"
+                    placeholder="name@example.com"
+                    name="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                  />
+                  {emailValidation && (
+                    <small style={{ color: "red" }}>Email already in use</small>
+                  )}
+                </div>
+                <div className="info__container">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    required={false}
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    id="password"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                  />
+                  {passwordLenValidation && (
+                    <small style={{ color: "red" }}>
+                      Password should be at least 6 characters.
+                    </small>
+                  )}
+                </div>
+                <div className="info__container">
+                  <label htmlFor="confrim_password">Confrim Password</label>
+                  <input
+                    required={false}
+                    type="password"
+                    placeholder="Confrim Password"
+                    name="confrim_password"
+                    id="confrim_password"
+                    value={confrimPassword}
+                    onChange={(e) => {
+                      setConfrimPassword(e.target.value);
+                      if (confrimPassword.length !== 0) {
+                        if (e.target.value === password) {
+                          setPasswordValidation("green");
+                        } else {
+                          setPasswordValidation("red");
+                        }
+                      }
+                    }}
+                  />
 
-              {passwordValidation === "red" ? (
-                <small style={{ color: passwordValidation }}>
-                  password doesn't match
-                </small>
-              ) : passwordValidation === "green" ? (
-                <small style={{ color: passwordValidation }}>
-                  password match
-                </small>
-              ) : (
-                <small style={{ color: passwordValidation }}></small>
-              )}
-              {error !== "" && (
-                <small style={{ fontWeight: "600", color: "red" }}>
-                  {error} Try again
-                </small>
-              )}
-            </div>
+                  {passwordValidation === "red" ? (
+                    <small style={{ color: passwordValidation }}>
+                      password doesn't match
+                    </small>
+                  ) : passwordValidation === "green" ? (
+                    <small style={{ color: passwordValidation }}>
+                      password match
+                    </small>
+                  ) : (
+                    <small style={{ color: passwordValidation }}></small>
+                  )}
+                  {error !== "" && (
+                    <small style={{ fontWeight: "600", color: "red" }}>
+                      {error} Try again
+                    </small>
+                  )}
+                </div>
+              </>
+            )}
+
             <input
               disabled={passwordValidation === "red"}
               type="submit"
-              value="Register"
+              value={role === "editAccount" ? "Save Changes" : "Register"}
               className="btn__primary"
             />
           </form>
-          <div className="saparator">
-            <div className="line"></div>
-            <div className="circle"></div>
-            <div className="line"></div>
-          </div>
+          {role === "register" && (
+            <>
+              <div className="saparator">
+                <div className="line"></div>
+                <div className="circle"></div>
+                <div className="line"></div>
+              </div>
 
-          <br />
-          <div className="signup__container">
-            <small>Already have an acount?</small>
-            <span>
-              <Link to="/login">Sign in</Link>
-            </span>
-          </div>
+              <br />
+              <div className="signup__container">
+                <small>Already have an acount?</small>
+                <span>
+                  <Link to="/login">Sign in</Link>
+                </span>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>
