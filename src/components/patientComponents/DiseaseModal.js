@@ -9,16 +9,19 @@ function DiseaseModal(props) {
   const [showMessage, setShowMessage] = useState(false);
   const handleClick = () => {
     props.toggleModal(false);
+    setFeedBack("");
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const docRef = await addDoc(collection(db, "feedbacks"), {
       patientName: props.user.displayName,
       patientProfile: props.user.photoURL,
+      email: props.user.email,
       Feedback: feedback,
     });
     console.log("Document written with ID: ", docRef.id);
     setShowMessage(true);
+    setFeedBack("");
     setTimeout(() => {
       setShowMessage(false);
       props.toggleModal(false);

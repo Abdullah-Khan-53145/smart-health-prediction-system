@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toggleSideMenu } from "../../actions";
 import { SignOutAPI } from "../../actions";
 import "./Header.css";
@@ -35,7 +35,7 @@ function Header(props) {
                 Welcome <b>{user.displayName.split(" ")[0]}</b>
               </h2>
               <small>{user.email}</small>
-              <button className="_btn_user">
+              <Link to="/patient/setting" className="_btn_user">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
@@ -56,7 +56,7 @@ function Header(props) {
                   />
                 </svg>
                 Account settings
-              </button>
+              </Link>
             </div>
           </button>
           <button className="logout _btn_" onClick={handleLogOut}>

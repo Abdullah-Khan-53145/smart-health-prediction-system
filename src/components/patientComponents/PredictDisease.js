@@ -20,9 +20,7 @@ function PredictDisease(props) {
   const [finalRecord, setFinalRecord] = useState({});
 
   const addToDataBase = async (data) => {
-    const docRef = await addDoc(collection(db, "pateintRecord"), {
-      data,
-    });
+    const docRef = await addDoc(collection(db, "pateintRecord"), data);
     console.log("Document written with ID: ", docRef.id);
   };
   const [symthoms, setSym] = useState([]);
@@ -157,8 +155,8 @@ function PredictDisease(props) {
             <label htmlFor="asd">Sorry disease not found</label>
           </div>
         )}
-
-        {suspectedDiseases.length !== 0 && (
+        {/* This is resolved tommorow */}
+        {/* {suspectedDiseases.length !== 0 && (
           <div className="sym_selector">
             <label htmlFor="None_of_above">None of above</label>
             <input
@@ -173,7 +171,7 @@ function PredictDisease(props) {
               required
             />
           </div>
-        )}
+        )} */}
         {suspectedDiseases.length !== 0 ? (
           <input
             className="btn__primary"

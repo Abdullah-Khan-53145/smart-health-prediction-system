@@ -6,15 +6,17 @@
   z-index: -1;
   padding: 100px 10px;
 }
+.reviews__section {
+  max-width: 1200px;
+  width: 100%;
+}
 
 .reviews__container {
   display: flex;
-  justify-content: ;
+  justify-content: space-around;
   padding-top: 30px;
-  gap: 20px;
   max-width: 1200px;
-  margin: auto;
-  background-attachment: fixed;
+  width: 100%;
 }
 
 .review__card {
@@ -55,5 +57,10 @@
 @media (max-width: 700px) {
   .reviews__container {
     flex-direction: column;
+  }
+  .review__card {
+    width: 100%;
+    max-width: 100%;
+    margin: 20px 0px;
   }
 }

@@ -9,6 +9,16 @@ import { auth } from "../firebase";
 import { setLoading } from "../actions";
 import { SignInWithEmailPasswordAPI } from "../actions";
 import { useNavigate } from "react-router-dom";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  setDoc,
+  doc,
+} from "firebase/firestore";
+import { db } from "../firebase";
+
 import "./Login.css";
 import "./Signup.css";
 function Signup(props) {
@@ -34,8 +44,9 @@ function Signup(props) {
     if (user === null && role === "editAccount") {
       navigation("/home");
     }
+
     // eslint-disable-next-line
-  }, []);
+  });
   // Function to register the user to firebase with profile picture and Display Name using storage
   const registerUser = (user) => {
     setLoading(true);
@@ -82,6 +93,7 @@ function Signup(props) {
                     .then(() => {
                       setLoading(false);
                       const user = userCredential.user;
+
                       signIn(user);
                       console.log(user);
                       navigation("/patient");
@@ -155,6 +167,10 @@ function Signup(props) {
               .then((user) => {
                 setLoading(false);
                 signIn(auth.currentUser);
+                updatePatientRecord(
+                  auth.currentUser.photoURL,
+                  auth.currentUser.displayName
+                );
               })
               .catch((error) => {
                 setLoading(false);
@@ -206,8 +222,89 @@ function Signup(props) {
         UpdateUser(user);
       }
     } else {
-      setError("Profile picture required, ");
+      if (role === "register") {
+        console.log("This one is executing");
+        setError("Profile picture required, ");
+      } else {
+        setLoading(true);
+        updateProfile(auth.currentUser, {
+          displayName: displayName,
+        })
+          .then(() => {
+            setLoading(false);
+            signIn(auth.currentUser);
+            updatePatientRecord("", auth.currentUser.displayName);
+          })
+          .catch((error) => {
+            setLoading(false);
+            const errorCode = error.code;
+            const errorMessage = error.message.substr(10);
+            console.log(errorCode, "\n", errorMessage, "this one");
+            console.log(errorCode, error.message);
+            if (errorCode === "auth/email-already-in-use") {
+              setEmailValidation(true);
+              console.log("hello");
+            } else if (errorCode === "auth/weak-password") {
+              setpasswordLenValidation(true);
+              console.log("hello");
+            } else {
+              setError(errorCode);
+            }
+          });
+      }
     }
+  };
+
+  const updatePatientRecord = (URL, displayName) => {
+    const record = query(collection(db, "pateintRecord"));
+    let patientForRecord = [];
+    getDocs(record).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if (doc.data().email === email) {
+          patientForRecord.push({ patientInfo: doc.data(), id: doc.id });
+        }
+      });
+
+      console.log(patientForRecord);
+      patientForRecord.forEach((element) => {
+        const updateRef = doc(db, "pateintRecord", element.id);
+        setDoc(updateRef, { patientName: displayName }, { merge: true })
+          .then(() => {
+            console.log("updated successfully");
+          })
+          .catch((e) => {
+            console.log(e.code, e.message);
+          });
+      });
+    });
+    const feedbacks = query(collection(db, "feedbacks"));
+    let patientForFeedbacks = [];
+    getDocs(feedbacks).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if (doc.data().email === email) {
+          patientForFeedbacks.push({ patientInfo: doc.data(), id: doc.id });
+        }
+      });
+
+      console.log(patientForRecord);
+      patientForFeedbacks.forEach((element) => {
+        if (URL === "") {
+          const updateRef = doc(db, "feedbacks", element.id);
+          setDoc(updateRef, { patientName: displayName }, { merge: true })
+            .then(() => {
+              console.log("updated successfully");
+            })
+            .catch((e) => {
+              console.log(e.code, e.message);
+            });
+        } else {
+          const updateRef = doc(db, "feedbacks", element.id);
+          setDoc(updateRef, { patientName: displayName }, { merge: true });
+          const updatePro = doc(db, "feedbacks", element.id);
+          setDoc(updatePro, { patientProfile: URL }, { merge: true });
+        }
+      });
+    });
   };
 
   return (

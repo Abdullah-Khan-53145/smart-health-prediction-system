@@ -12,9 +12,8 @@ function PatientRecord(props) {
     getDocs(collection(db, "pateintRecord")).then((querySnapshot) => {
       let recordArr = [];
       querySnapshot.forEach((doc) => {
-        if (doc.data().data.email === user.email) {
+        if (doc.data().email === user.email) {
           recordArr.push(doc.data());
-          console.log(doc.data());
         }
       });
       setRecord(recordArr);
@@ -42,13 +41,13 @@ function PatientRecord(props) {
           <tbody>
             {record.length !== 0 ? (
               record.map((element, index) => (
-                <tr>
+                <tr key={index}>
                   <td>{index + 1}</td>
-                  <td>{element.data.patientName}</td>
-                  <td>{element.data.disease}</td>
-                  <td>{element.data.syms}</td>
-                  <td>{element.data.dateTime.split(",")[0]}</td>
-                  <td>{element.data.dateTime.split(",")[1]}</td>
+                  <td>{element.patientName}</td>
+                  <td>{element.disease}</td>
+                  <td>{element.syms}</td>
+                  <td>{element.dateTime.split(",")[0]}</td>
+                  <td>{element.dateTime.split(",")[1]}</td>
                 </tr>
               ))
             ) : (
