@@ -1,6 +1,6 @@
 # Smart Health Prediction System
 
-Application of Health pridiction system. Developed using React jS, Redux and firebase. In this project patient can login by google account or can sign up here and then login using the registered email this authentication is achieved by firebase, also each and every validation is integrated. after loging in patient can add a disease's one symptom and then system offer them a set of disease and then patient select one on them, on that choice system predict disease and show the disease after showing it shows the option to submit the feed back that are shown on main page of the web site. All the record is maintained in firestore and feedbacks are comming live form the tha firestore on the main page plus patient can see there precious record and change his account setting as well. So it is a full stack complete web app.
+Application of Health pridiction system. Developed using React jS, Redux and firebase. In this web app patient can login by google account or can sign up here and then login using the registered email this authentication is achieved by firebase, also each and every validation is integrated. after loging in patient can add a disease's one symptom and then system offer them a set of disease and then patient select one on them, on that choice system predict disease and show the disease after showing it shows the option to submit the feed back that are shown on main page of the web site. All the record is maintained in firestore and feedbacks are comming live form the tha firestore on the main page plus patient can see there precious record and change his account setting as well. So it is a full stack complete web app.
 
 <img src="SHPS.png">
 
@@ -73,12 +73,6 @@ yarn start
 
 #### Abdullah Khan
 
-[![LinkedIn Link](https://img.shields.io/badge/Connect-Hamza-blue.svg?logo=linkedin&longCache=true&style=social&label=Connect)](https://www.linkedin.com/in/abdullah-khan-30471a238/)
-
-You can also follow my GitHub Profile to stay updated about my latest projects:
-
-[![GitHub Follow](https://img.shields.io/badge/Connect-Hamza-blue.svg?logo=Github&longCache=true&style=social&label=Follow)](https://github.com/Abdullah-Khan-53145)
-
-If you liked the repo then kindly support it by giving it a star ⭐!
+Email - abdullah.khan53145@gmail.com
 
 Copyright (c) 2020 Abdullah Khan
