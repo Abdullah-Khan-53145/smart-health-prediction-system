@@ -1,6 +1,6 @@
 # Smart Health Prediction System
 
-Application of Health pridiction system. Developed using React jS, Redux and firebase.
+Application of Health prediction system. Developed using React jS, Redux and firebase.
 
 <img src="SHPS.png">
 
