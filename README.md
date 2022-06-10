@@ -29,7 +29,7 @@ In this web app patient can login by google account or can sign up here and then
 
 - Install Node js if its is not installed already
 
-Open CMD where you want to clone the project & run the following commands
+Open CMD where you want to run the project & run the following commands
 
 First Step:
 
