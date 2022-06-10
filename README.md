@@ -15,6 +15,12 @@ Application of Health prediction system. Developed using React jS, Redux and fir
 
 In this web app patient can login by google account or can sign up here and then login using the registered email, This authentication is achieved by firebase, also each and every validation is integrated. after loging in patient can add a symptom of disease and then system offer them a set of disease and then patient select one on them, on that choice system predict disease and show the disease after showing it shows the option to submit the feedback that are shown on main page of the website. All the record is maintained in firestore and feedbacks are comming live form the tha firestore on the main page plus patient can see there precious record and change his account setting as well. So it is a full stack complete webapp.
 
+## 🪓 Tools
+
+- React JS
+- Redux
+- firebase
+
 ## 👀 Live preview
 
 <a href="https://smart-health-prediction-7dbeb.web.app/">Click here to watch live demo</a>
@@ -67,11 +73,11 @@ yarn start
 
 ## 🧑‍🔧 Features Still under progress
 
-✅ Diseases in DB
+- Diseases in DB
 
-✅ Doctor's section
+- Doctor's section
 
-✅ Admin's section
+- Admin's section
 
 ## 🧑 Author
 
