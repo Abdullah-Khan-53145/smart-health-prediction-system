@@ -1,15 +1,12 @@
-# The Holy Qur'an 2.5.0
+# Smart Health Prediction System
 
-Application of Health pridiction systme. Developed using React jS, Redux and firebase
-Everything is realtime and working..
+Application of Health pridiction system. Developed using React jS, Redux and firebase. In this project patient can login by google account or can sign up here and then login using the registered email this authentication is achieved by firebase, also each and every validation is integrated. after loging in patient can add a disease's one symptom and then system offer them a set of disease and then patient select one on them, on that choice system predict disease and show the disease after showing it shows the option to submit the feed back that are shown on main page of the web site. All the record is maintained in firestore and feedbacks are comming live form the tha firestore on the main page plus patient can see there precious record and change his account setting as well. So it is a full stack complete web app.
 
 <img src="SHPS.png">
 
 <div align="center">
 
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](#)
-[![GitHub Forks](https://img.shields.io/github/forks/saadhaxxan/Car_Game_Python_Pygame.svg?style=social&label=Fork&maxAge=2592000)](https://github.com/Abdullah-Khan-53145/smart-health-prediction-system/fork)
-[![GitHub Issues](https://img.shields.io/github/issues/saadhaxxan/Car_Game_Python_Pygame.svg?style=flat&label=Issues&maxAge=2592000)](https://github.com/Abdullah-Khan-53145/smart-health-prediction-system/issues)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat&label=Contributions&colorA=red&colorB=black)](#)
 
 </div>
@@ -24,28 +21,28 @@ Everything is realtime and working..
 
 Open CMD where you want to clone the project & run the following commands
 
-1.
+First Step:
 
 ```
 npm i react
 
 ```
 
-or
+OR
 
 ```
 yarn add react
 
 ```
 
-2.
+Second Step:
 
 ```
 npm run start
 
 ```
 
-or
+OR
 
 ```
 yarn start
@@ -64,13 +61,13 @@ yarn start
 
 ✅ Other fixes from Previous verion.
 
-## 🎯 Features Still under progress
+## 🧑‍🔧 Features Still under progress
 
 ✅ Diseases in DB
 
-✅ Doctor section
+✅ Doctor's section
 
-✅ Admin section
+✅ Admin's section
 
 ## 🧑 Author
 
