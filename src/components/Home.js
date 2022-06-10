@@ -22,9 +22,9 @@ function Home() {
             <Link to="/login-patient" className="btn__primary">
               Signin as Patient
             </Link>
-            <Link to="/login-doctor" className="btn__primary">
+            <button disabled={true} to="/login-doctor" className="btn__primary">
               Signin as Doctor
-            </Link>
+            </button>
           </div>
         </div>
         <div className="right">

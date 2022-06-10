@@ -42,10 +42,10 @@ function Header() {
               </li>
             </ul>
           </div>
-          <Link to="/login-admin" className="btn__primary">
+          <button disabled={true} to="/login-admin" className="btn__primary">
             <span>Login</span>
             <small>as a Admin</small>
-          </Link>
+          </button>
         </div>
         <div className="hamburger__menu">
           <label htmlFor="check">
