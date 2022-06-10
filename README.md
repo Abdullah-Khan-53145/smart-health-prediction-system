@@ -67,8 +67,6 @@ yarn start
 
 ✅ Real feedback appearing on main page from db
 
-✅ Bookmarks
-
 ✅ Other fixes from Previous verion.
 
 ## 🧑‍🔧 Features Still under progress
