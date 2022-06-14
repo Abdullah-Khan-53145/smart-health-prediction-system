@@ -20,13 +20,15 @@
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   gap: 20px;
 }
-.symthoms__form input[type="text"] {
+.symthoms__form select {
   outline: none;
   border: none;
   border-bottom: 2px solid var(--primary);
   font-size: 18px;
   background-color: var(--tertiary);
   padding: 5px;
+  width: 100%;
+  text-align: center;
 }
 .symthoms__form input[type="submit"] {
   outline: none;
@@ -38,6 +40,7 @@
   flex-direction: row;
   justify-content: center;
   width: 200px;
+  margin: auto;
 }
 
 .label_first_symthom {
@@ -54,7 +57,6 @@
 .form_selector {
   transform: scale(0);
   opacity: 0;
-  
 }
 .sym_selector {
   display: flex;
