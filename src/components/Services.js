@@ -2,7 +2,7 @@ import React from "react";
 import "./Services.css";
 function Services() {
   return (
-    <div className="services__main">
+    <div className="services__main" id="services__main">
       <div className="services__section">
         <h1 className="main_heading">Services</h1>
         <div className="saparator">

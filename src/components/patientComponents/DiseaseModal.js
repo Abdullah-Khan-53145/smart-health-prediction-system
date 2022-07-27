@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { toggleModal } from "../../actions";
 import { collection, addDoc } from "firebase/firestore";
+import { Link } from "react-router-dom";
 import { db } from "../../firebase";
 import "./DiseaseModal.css";
 function DiseaseModal(props) {
@@ -50,6 +51,12 @@ function DiseaseModal(props) {
       </div>
       <div className="disease__modal">
         <h2>Your Disease is {props.diseaseObj.disease}</h2>
+        <div className="doc__sug">
+          <h3 className="doc__name">Suggested Doctor is Dr. Usama</h3>
+          <Link onClick={handleClick} className="appointment" to="/patient">
+            Book appointment
+          </Link>
+        </div>
         <form onSubmit={handleSubmit} className="__feed__back__form">
           <label htmlFor="__feed__back">Enter your feed back (optional)</label>
           <textarea

@@ -149,7 +149,7 @@ function PredictDisease(props) {
 
       let date = new Date().toLocaleString();
       finaldata = {
-        disease: "infection ",
+        disease: "Skin Infection ",
         syms: "test",
         patientName: user.displayName,
         email: user.email,
