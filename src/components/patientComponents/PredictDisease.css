@@ -68,6 +68,12 @@
   color: gray;
   text-transform: uppercase;
 }
+.answer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: gray;
+}
 
 @keyframes form-off {
   0% {

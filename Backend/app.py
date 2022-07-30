@@ -1,14 +1,16 @@
 
 from flask_caching import Cache
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request, jsonify
 import pandas as pd
 from flask_caching import Cache
+from flask_cors import CORS
 import joblib
 import numpy as np
 
 clf=joblib.load("shealth.pkl")
 cache=Cache()
 app=Flask(__name__)
+CORS(app)
 app.config['CACHE_TYPE']='simple'
 cache.init_app(app)
 
@@ -19,36 +21,37 @@ a=ds.columns.to_numpy()
 dsa=ds.to_numpy()
 dataset=dsa
 
-@app.route('/',methods=['GET','POST'])
-
+@app.route('/predictdisease',methods=['GET','POST'])
 def main():
         
     if request.method=="POST":
         global i
         i=i+1
-        data=request.form['disease']
+        data=request.json['Answer']
         if data=='1':
+            q =0
             q=a[i]
             asd,dd=dat1()
             lendf=len(asd)
             if lendf==0:
                 dummy=pred(dd)
-                return f'<h1>  {dummy}</h1>'
+                return jsonify({"quest":0,"disease" : dummy})
             
-            return render_template('main.html',quest=q,length=lendf,disease=dd,daata=asd)
+            return jsonify({"quest":q,"disease" : 0})
   
 
         if data=='0':  
+            
             q=a[i]
             asd,dd=dat2()
             lendf=len(asd)
             if lendf==0:
                 dummy=pred(dd)
-                return f'<h1>  {dummy}</h1>'
-            return render_template('main.html',quest=q,length=lendf,disease=dd,daata=asd)
+                return jsonify({"quest":0,"disease" : dummy})
+            return jsonify({"quest":q,"disease" : 0})
   
     else:
-        return render_template('main.html',quest='Itching')  
+        return jsonify({"quest": "itching","disease" : 0})  
 
 # @cache.cached(timeout=1)
 def dat1():
@@ -72,9 +75,9 @@ def pred(dd):
     dff=dss.to_numpy()
 
 
-    for i in range(len(dff)):
+    for i in range(len(dff)):       
         if dff[i][132]==dd:
-            j=i
+           j=i
     bb=dff[j]
     asd=np.delete(bb,-1)
     asd=[asd]

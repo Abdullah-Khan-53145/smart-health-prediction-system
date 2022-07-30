@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { db } from "../../firebase";
 import "./DiseaseModal.css";
 function DiseaseModal(props) {
+  const { doctor, desease } = props;
   const [feedback, setFeedBack] = useState("");
   const [showMessage, setShowMessage] = useState(false);
   const handleClick = () => {
@@ -27,6 +28,17 @@ function DiseaseModal(props) {
       setShowMessage(false);
       props.toggleModal(false);
     }, 2000);
+  };
+  const AppointmentSend = async () => {
+    handleClick();
+    const docRef = await addDoc(collection(db, doctor), {
+      patientName: props.user.displayName,
+      patientProfile: props.user.photoURL,
+      desease: desease,
+      email: props.user.email,
+      Feedback: feedback,
+    });
+    console.log("Document written with ID: ", docRef.id);
   };
   return (
     <div
@@ -50,10 +62,10 @@ function DiseaseModal(props) {
         </svg>
       </div>
       <div className="disease__modal">
-        <h2>Your Disease is {props.diseaseObj.disease}</h2>
+        <h2>Your Disease is {desease}</h2>
         <div className="doc__sug">
           <h3 className="doc__name">Suggested Doctor is Dr. Usama</h3>
-          <Link onClick={handleClick} className="appointment" to="/patient">
+          <Link onClick={AppointmentSend} className="appointment" to="/patient">
             Book appointment
           </Link>
         </div>
