@@ -22,7 +22,7 @@ function PatientHome(props) {
     <div>
       <Header user={user} />
       <SideMenu user={user} />
-      <Home />
+      <Home user={user} />
     </div>
   );
 }

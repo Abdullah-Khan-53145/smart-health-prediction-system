@@ -19,7 +19,7 @@ function Review() {
     // eslint-disable-next-line
   }, []);
   return (
-    <div className="reviews__main">
+    <div className="reviews__main" id="reviews">
       <div className="reviews__section">
         <h1 className="main_heading">Recent Feedbacks</h1>
         <div className="saparator">

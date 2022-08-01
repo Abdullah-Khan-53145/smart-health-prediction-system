@@ -7,7 +7,6 @@ function Doctor() {
   return (
     <div>
       <DoctorHeader />
-      <Appointment />
       <PatientRecord role="doctor" />
     </div>
   );

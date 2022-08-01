@@ -3,12 +3,15 @@ import { connect } from "react-redux";
 import { toggleModal } from "../../actions";
 import { collection, addDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase";
 import "./DiseaseModal.css";
 function DiseaseModal(props) {
+  const navigate = useNavigate();
   const { doctor, desease } = props;
   const [feedback, setFeedBack] = useState("");
   const [showMessage, setShowMessage] = useState(false);
+  const [appBook, setappBook] = useState("");
   const handleClick = () => {
     props.toggleModal(false);
     setFeedBack("");
@@ -30,22 +33,27 @@ function DiseaseModal(props) {
     }, 2000);
   };
   const AppointmentSend = async () => {
-    handleClick();
-    const docRef = await addDoc(collection(db, doctor), {
+    const docRef = await addDoc(collection(db, "appointments"), {
+      doctor: doctor,
       patientName: props.user.displayName,
       patientProfile: props.user.photoURL,
       desease: desease,
       email: props.user.email,
-      Feedback: feedback,
     });
     console.log("Document written with ID: ", docRef.id);
+    setappBook("Appointment request sent successfully");
+    setTimeout(() => {
+      setappBook("");
+      handleClick();
+      navigate("/patient");
+    }, 2000);
   };
   return (
     <div
       className="main__page"
       style={{ display: props.showModal ? "flex" : "none" }}
     >
-      <div className="__modal__close" onClick={handleClick}>
+      <Link to="/patient" className="__modal__close" onClick={handleClick}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"
@@ -60,14 +68,16 @@ function DiseaseModal(props) {
             d="M6 18L18 6M6 6l12 12"
           />
         </svg>
-      </div>
+      </Link>
       <div className="disease__modal">
         <h2>Your Disease is {desease}</h2>
         <div className="doc__sug">
-          <h3 className="doc__name">Suggested Doctor is Dr. Usama</h3>
-          <Link onClick={AppointmentSend} className="appointment" to="/patient">
+          <h3 className="doc__name">Suggested Doctor is Dr. {props.doctor}</h3>
+          <button onClick={AppointmentSend} className="appointment">
             Book appointment
-          </Link>
+          </button>
+          <br />
+          <span style={{ color: "green" }}>{appBook}</span>
         </div>
         <form onSubmit={handleSubmit} className="__feed__back__form">
           <label htmlFor="__feed__back">Enter your feed back (optional)</label>

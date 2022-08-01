@@ -32,20 +32,19 @@ function Header() {
           <div className="navlist ">
             <ul>
               <li>
-                <a>Home</a>
+                <a href="#home">Home</a>
               </li>
               <li>
-                <a>Services</a>
+                <a href="#services">Services</a>
               </li>
               <li>
-                <a>Reviews</a>
+                <a href="#reviews">Reviews</a>
+              </li>
+              <li>
+                <a href="#footer">About</a>
               </li>
             </ul>
           </div>
-          <button disabled={true} to="/login-admin" className="btn__primary">
-            <span>Login</span>
-            <small>as a Admin</small>
-          </button>
         </div>
         <div className="hamburger__menu">
           <label htmlFor="check">
@@ -69,10 +68,6 @@ function Header() {
               </li>
             </ul>
           </div>
-          <Link to="/login-admin" className="btn__primary">
-            <span>Login</span>
-            <small>as a Admin</small>
-          </Link>
         </div>
       </div>
     </div>

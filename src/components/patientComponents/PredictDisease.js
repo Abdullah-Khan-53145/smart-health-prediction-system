@@ -7,23 +7,18 @@ import DiseaseModal from "./DiseaseModal";
 import { connect } from "react-redux";
 import { toggleModal } from "../../actions";
 import { db } from "../../firebase";
-import { doc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot, getDocs } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
 
 function PredictDisease(props) {
   // states
 
-  const [suspectedDiseases, SetSuspectedDiseases] = useState([]);
-  const [finalOption, setfinalOption] = useState({});
-  const [symList, setSymList] = useState([]);
-  const [check, setCheck] = useState();
-  const [firstSym, setFirstSym] = useState("Skin");
-  const [styleForm, setStyleForm] = useState({});
-  const [styleSecondForm, setStyleSecondForm] = useState({});
-  const [finalRecord, setFinalRecord] = useState({});
-  const [symtomsAsk, setSymtomAsk] = useState({ index: 0, ask: [] });
   const [sym, setSym] = useState("");
-  const [Answer, setAnswer] = useState("1");
+  const [doctor, setDoctor] = useState([]);
+  const [sugDoc, setSugDoc] = useState("");
+  const [Answer, setAnswer] = useState(null);
+  const [firstForm, setFirstForm] = useState("flex");
+  const [secondForm, setSecondForm] = useState("none");
   const [diseaseObj, SetdiseaseObj] = useState({
     quest: "Uhmm... ",
     disease: 0,
@@ -39,13 +34,27 @@ function PredictDisease(props) {
     axios.get(`http://127.0.0.1:5000/predictdisease`).then((res) => {
       const predData = res.data;
       SetdiseaseObj(predData);
-      console.log(predData);
     });
+    let doctors = [];
+    getDocs(collection(db, "doctors")).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        doctors.push(doc.data());
+        setDoctor(doctors);
+      });
+    });
+
     // eslint-disable-next-line
   }, []);
 
-  const handleLastSubmit = (e) => {
+  const handleLastSubmit = async (e) => {
     e.preventDefault();
+    if (Answer === "1") {
+      if (sym === "") {
+        setSym(diseaseObj.quest);
+      } else if (diseaseObj.quest !== 0) {
+        setSym(`${sym}, ${diseaseObj.quest}`);
+      }
+    }
     if (diseaseObj.disease === 0) {
       axios
         .post(`http://127.0.0.1:5000/predictdisease`, {
@@ -54,14 +63,8 @@ function PredictDisease(props) {
         .then((res) => {
           const predData = res.data;
           SetdiseaseObj(predData);
-          if (sym === "") {
-            setSym(predData.quest);
-          } else if (predData.quest !== 0) {
-            setSym(`${sym}, ${predData.quest}`);
-          }
         });
     } else {
-      console.log(diseaseObj);
       console.log(sym);
       const current = new Date();
       addToDataBase({
@@ -71,32 +74,51 @@ function PredictDisease(props) {
         patientName: props.user.displayName,
         syms: sym,
       });
+      setSugDoc(
+        doctor[Math.floor(Math.random() * (doctor.length - 1 - 0 + 1) + 0)].name
+      );
       props.toggleModal(true);
     }
   };
-
+  const toggleForm = (e) => {
+    e.preventDefault();
+    setFirstForm("none");
+    setSecondForm("flex");
+  };
   const { user } = props;
   return (
     <div className="_patient_predict_disease_section">
-      <DiseaseModal
-        diseaseObj={finalRecord}
-        doctor="Dr. Usama"
-        desease={diseaseObj.disease}
-      />
+      <DiseaseModal doctor={sugDoc} desease={diseaseObj.disease} />
 
       <Header user={user} />
       <SideMenu user={user} />
-      <h1 className="test_predict_section">Predict disease</h1>
+
+      <h1 className="test_predict_section">Predict disease {sugDoc}</h1>
       <h2>Enter the symptom in below form and they should be valid</h2>
+      <form
+        onSubmit={toggleForm}
+        style={{ display: firstForm }}
+        className="symthoms__form"
+      >
+        <div className="label_first_symthom" htmlFor="start_symthon">
+          Enter the Disease Type?
+        </div>
+        <select name="" id="">
+          <option value="skin">Skin</option>
+          <option value="Heart">Heart</option>
+          <option value="stomach">Stomach</option>
+        </select>
+
+        <input className="btn__primary" type="submit" />
+      </form>
       {diseaseObj.quest !== 0 ? (
         <form
-          style={styleForm}
           onSubmit={handleLastSubmit}
           onChange={(e) => {
             setAnswer(e.target.value);
             console.log(Answer);
           }}
-          action=""
+          style={{ display: secondForm }}
           className="symthoms__form"
         >
           <div className="label_first_symthom" htmlFor="start_symthon">
@@ -104,32 +126,23 @@ function PredictDisease(props) {
           </div>
           <div className="answer">
             <label htmlFor="Yes">Yes</label>
-            <input type="radio" value="1" name="Answer" id="Yes" />
+            <input type="radio" value="1" name="Answer" id="Yes" required />
           </div>
           <div className="answer">
             <label htmlFor="No">No</label>
-            <input type="radio" value="0" name="Answer" id="No" />
+            <input type="radio" value="0" name="Answer" id="No" required />
           </div>
 
-          {suspectedDiseases.length !== 0 ? (
-            <input
-              className="btn__primary"
-              type="submit"
-              firstSym="Predict Disease"
-            />
-          ) : (
-            <input className="btn__primary" type="submit" firstSym="Back" />
-          )}
+          <input className="btn__primary" type="submit" />
         </form>
       ) : (
         <form
-          style={styleForm}
           onSubmit={handleLastSubmit}
           onChange={(e) => {
             setAnswer(e.target.value);
             console.log(Answer);
           }}
-          action=""
+          style={{ display: secondForm }}
           className="symthoms__form"
         >
           <div className="label_first_symthom" htmlFor="start_symthon">

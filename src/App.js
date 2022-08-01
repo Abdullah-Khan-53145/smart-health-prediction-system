@@ -16,6 +16,8 @@ import PatientRecord from "./components/PatientRecord";
 import PredictDisease from "./components/patientComponents/PredictDisease";
 import AccountSetting from "./components/patientComponents/AccountSetting";
 import Doctor from "./components/doctorComponents/Doctor";
+import Notifications from "./components/doctorComponents/Notifications";
+import DoctorHeader from "./components/doctorComponents/DoctorHeader";
 function App() {
   const [display, setDisplay] = useState("flex");
   useEffect(() => {
@@ -78,9 +80,15 @@ function App() {
             <Route exact path="/doctor" element={<Doctor />}></Route>
             <Route
               exact
-              path="/doctor/record"
-              element={<PatientRecord role="doctor"/>}
+              path="/doctor/appointments"
+              element={
+                <>
+                  <DoctorHeader />
+                  <Notifications />
+                </>
+              }
             ></Route>
+
             <Route
               exact
               path="/"

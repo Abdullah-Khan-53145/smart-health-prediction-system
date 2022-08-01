@@ -1,12 +1,40 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  collection,
+  query,
+  onSnapshot,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
+import { db } from "../../firebase";
+import ConfrimAppointment from "./ConfrimAppointment";
 import "./Home.css";
-function Home() {
+function Home(props) {
+  const [app, setApp] = useState([]);
+  useEffect(() => {
+    const q = query(collection(db, "confrim_appointments"));
+    onSnapshot(q, (querySnapshot) => {
+      let appoint = [];
+      querySnapshot.forEach((doc) => {
+        if (doc.data().email === props.user.email) {
+          appoint.push({ ...doc.data(), id: doc.id });
+        }
+      });
+      setApp(appoint);
+    });
+  }, []);
+
   return (
     <div className="_patient_home_main_container">
       <div className="_patient_home">
         <div className="_patient_home_module">
           <div className="_patient_upper_card">
+            {app.map((element) => (
+              <ConfrimAppointment info={element} />
+            ))}
+
             <h1>Welcome to Smart Health prediction!!</h1>
             <h2>
               Diagnose Your Disease At home. This is how How we predict the

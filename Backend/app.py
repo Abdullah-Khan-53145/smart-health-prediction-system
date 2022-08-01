@@ -29,7 +29,6 @@ def main():
         i=i+1
         data=request.json['Answer']
         if data=='1':
-            q =0
             q=a[i]
             asd,dd=dat1()
             lendf=len(asd)

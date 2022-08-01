@@ -5,6 +5,8 @@ import { SignInWithGoogleAPI } from "../actions";
 import { connect } from "react-redux";
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { collection, doc, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
 import { SignInWithEmailPasswordAPI, setLoading } from "../actions";
 function Login(props) {
   //hooks
@@ -43,7 +45,7 @@ function Login(props) {
       });
   };
 
-  const LoginWithEmailPassword = (e) => {
+  const LoginWithEmailPassword = async (e) => {
     setError({
       password: false,
       email: false,
@@ -83,26 +85,33 @@ function Login(props) {
           }
         });
     } else {
-      if (email === "doctor123@gmail.com" && password === "1234") {
-        navigate("/doctor");
-        setLoading(false);
-      } else if (email === "doctor123@gmail.com") {
-        setLoading(false);
-        setError({
-          ...error,
-          password: true,
-          email: false,
-          message: "Incorrect Password",
-        });
-      } else {
-        setLoading(false);
-        setError({
-          ...error,
-          email: true,
-          password: false,
-          message: "Incorrect Email",
-        });
-      }
+      setLoading(false);
+      let user = true;
+      const querySnapshot = await getDocs(collection(db, "doctors"));
+      querySnapshot.forEach((doc) => {
+        if (doc.data().email === email && doc.data().password === password) {
+          localStorage.setItem(
+            "doctor",
+            JSON.stringify({
+              name: doc.data().name,
+              email: doc.data().email,
+              password: doc.data().password,
+            })
+          );
+          user = false;
+          navigate("/doctor");
+        }
+        if (user) {
+          setError({
+            ...error,
+            password: true,
+            email: false,
+            message: "User doesn't exists",
+          });
+        }
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+      });
     }
   };
   return (

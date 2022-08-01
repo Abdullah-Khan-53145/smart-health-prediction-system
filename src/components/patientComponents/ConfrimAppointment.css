@@ -1,0 +1,16 @@
+.confrim__appointment {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  margin: 10px;
+  padding: 10px;
+}
+.confrim__appointment span {
+  width: 100%;
+  text-align: left;
+}
+.confrim__buttons button svg {
+  height: 15px;
+  width: 15px;
+}

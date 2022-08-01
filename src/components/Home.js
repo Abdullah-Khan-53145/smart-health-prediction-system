@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import "./Home.css";
 function Home() {
   return (
-    <div className="Home__container">
+    <div className="Home__container" id="home">
       <div className="home_section">
         <div className="left">
           <h1>Smart health prediction sytem</h1>
